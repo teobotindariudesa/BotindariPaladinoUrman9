@@ -44,7 +44,7 @@ function Registro(props) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Registro</Text>
+            <Text style={styles.titulo}>Registro</Text>
             <TextInput
                 style={styles.field}
                 keyboardType='email-address'
@@ -69,8 +69,8 @@ function Registro(props) {
                 value={password}
             />
             {error ? <Text style={styles.error}>{error}</Text> : null}
-            <Pressable style={styles.registrarme} onPress={onSubmit}>
-                <Text style={styles.buttonText}>Registrate</Text>
+            <Pressable style={styles.boton} onPress={() => {onSubmit}}>
+                <Text style={styles.textoBoton}>Registrate</Text>
             </Pressable>
             <Pressable onPress={() => props.navigation.navigate('Login')}>
                 <Text style={styles.cuentaExiste}>Ya tengo cuenta</Text>
@@ -84,8 +84,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         paddingHorizontal: 20,
+        backgroundColor: '#f0f0f0'
     },
-    title: {
+    titulo: {
         fontSize: 28,
         fontWeight: 'bold',
         marginBottom: 20,
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
         marginVertical: 6,
         textAlign: 'center',
     },
-    registrarme: {
+    boton: {
         alignItems: 'center',
         backgroundColor: '#166fc2',
         paddingHorizontal: 10,
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
         borderColor: '#166fc2',
         marginTop: 6,
     },
-    buttonText: {
+    textoBoton: {
         color: '#fff',
     },
     cuentaExiste: {
