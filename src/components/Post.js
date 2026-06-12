@@ -12,31 +12,37 @@ const Post = ({ data, id, navigation }) => {
   const likear = () => {
     db.collection('posts')
       .doc(id)
-      .update({ likes: firebase.firestore.FieldValue.arrayUnion(emailUsuario) });
+      .update({ 
+              likes: firebase.firestore.FieldValue.arrayUnion(emailUsuario) 
+              });
   };
 
   const unLikear = () => {
     db.collection('posts')
       .doc(id)
-      .update({ likes: firebase.firestore.FieldValue.arrayRemove(emailUsuario) });
+      .update({ 
+              likes: firebase.firestore.FieldValue.arrayRemove(emailUsuario) 
+             });
   };
 
   return (
     <View style={styles.container}>
+
       <Text style={styles.username}>{data.username || data.email}</Text>
       <Text style={styles.descripcion}>{data.description}</Text>
-      {data.imageUri ? (
-        <Image source={{ uri: data.imageUri }} style={styles.imagen} resizeMode="cover" />
-      ) : null}
+
       <View style={styles.acciones}>
+
         <Pressable style={styles.botonAccion} onPress={likeo ? unLikear : likear}>
           <AntDesign name={likeo ? 'like1' : 'like2'} size={20} color={likeo ? '#166fc2' : 'black'} />
           <Text style={styles.botonTexto}>{likes.length}</Text>
         </Pressable>
+
         <Pressable style={styles.botonAccion} onPress={() => navigation.navigate('ComentarPosteo', { postId: id })}>
           <AntDesign name="message1" size={20} color="black" />
           <Text style={styles.botonTexto}>Comentar</Text>
         </Pressable>
+        
       </View>
     </View>
   );
