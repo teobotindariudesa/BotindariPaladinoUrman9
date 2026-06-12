@@ -69,14 +69,14 @@ function Registro(props) {
                 value={password}
             />
             {error ? <Text style={styles.error}>{error}</Text> : null}
-            <Pressable style={styles.boton} onPress={() => {onSubmit}}>
+            <Pressable style={styles.boton} onPress={onSubmit}>
                 <Text style={styles.textoBoton}>Registrate</Text>
             </Pressable>
             <Pressable onPress={() => props.navigation.navigate('Login')}>
                 <Text style={styles.cuentaExiste}>Ya tengo cuenta</Text>
             </Pressable>
         </View>
-    );
+    );  http://localhost:8081/
 }
 
 const styles = StyleSheet.create({
