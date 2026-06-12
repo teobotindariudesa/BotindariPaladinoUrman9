@@ -76,7 +76,7 @@ function Registro(props) {
                 <Text style={styles.cuentaExiste}>Ya tengo cuenta</Text>
             </Pressable>
         </View>
-    );  http://localhost:8081/
+    );
 }
 
 const styles = StyleSheet.create({
