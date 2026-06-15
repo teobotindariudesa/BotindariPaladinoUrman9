@@ -29,7 +29,7 @@ const Post = ({ data, id, navigation }) => {
     <View style={styles.container}>
 
       <Text style={styles.username}>{data.username || data.email}</Text>
-      <Text style={styles.descripcion}>{data.descripcion}</Text>
+      <Text style={styles.descripcion}>{data.descripcionPost}</Text>
 
       <View style={styles.acciones}>
 
