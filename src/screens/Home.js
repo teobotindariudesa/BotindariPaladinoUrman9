@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { db, auth } from '../firebase/config';
 import Post from '../components/Post';
 
@@ -8,11 +8,6 @@ const Home = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!auth.currentUser) {
-      navigation.replace('Login');
-      return;
-    }
-
     const unsubscribe = db.collection('posts')
       .orderBy('createdAt', 'desc')
       .onSnapshot(docs => {
@@ -26,14 +21,6 @@ const Home = ({ navigation }) => {
 
     return () => unsubscribe();
   }, []);
-
-  if (loading) {
-    return (
-      <View style={styles.centered}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
 
   return (
     <View style={styles.container}>
@@ -51,11 +38,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
-  },
-  centered: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     fontSize: 24,
