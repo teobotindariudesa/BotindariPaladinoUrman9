@@ -34,9 +34,6 @@ function Registro(props) {
                     username: username,
                 });
             })
-            .then(() => {
-                props.navigation.navigate('Login');
-            })
             .catch((e) => {
                 setError(e.message);
             });
@@ -75,6 +72,7 @@ function Registro(props) {
             <Pressable onPress={() => props.navigation.navigate('Login')}>
                 <Text style={styles.cuentaExiste}>Ya tengo cuenta</Text>
             </Pressable>
+
         </View>
     );
 }
