@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
-import AntDesign from '@expo/vector-icons/AntDesign';
+import {AntDesign} from '@expo/vector-icons';
 import firebase from 'firebase/app';
 import { db, auth } from '../firebase/config';
 
@@ -22,24 +22,24 @@ const Post = ({ data, id, navigation }) => {
       .doc(id)
       .update({ 
               likes: firebase.firestore.FieldValue.arrayRemove(emailUsuario) 
-             });
+            });
   };
 
   return (
     <View style={styles.container}>
 
       <Text style={styles.username}>{data.username || data.email}</Text>
-      <Text style={styles.descripcion}>{data.description}</Text>
+      <Text style={styles.descripcion}>{data.descripcion}</Text>
 
       <View style={styles.acciones}>
 
         <Pressable style={styles.botonAccion} onPress={likeo ? unLikear : likear}>
-          <AntDesign name={likeo ? 'like1' : 'like2'} size={20} color={likeo ? '#166fc2' : 'black'} />
+          <AntDesign name="like" size={20} color={likeo ? '#166fc2' : 'black'} />
           <Text style={styles.botonTexto}>{likes.length}</Text>
         </Pressable>
 
         <Pressable style={styles.botonAccion} onPress={() => navigation.navigate('ComentarPosteo', { postId: id })}>
-          <AntDesign name="message1" size={20} color="black" />
+          <AntDesign name="message" size={20} color="black" />
           <Text style={styles.botonTexto}>Comentar</Text>
         </Pressable>
         
