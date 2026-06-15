@@ -5,7 +5,7 @@ import { db, auth } from '../firebase/config';
 function CrearPosteo(props) {
     const [descripcionPost, setDescripcionPost] = useState('');
 
-    function handlePublicar() {
+    function publicar() {
         db.collection('posts').add({
             email: auth.currentUser.email,
             descripcionPost: descripcionPost,
@@ -29,7 +29,7 @@ function CrearPosteo(props) {
                 numberOfLines={4}
                 textAlignVertical="top"
             />
-            <Pressable style={styles.button} onPress={handlePublicar}>
+            <Pressable style={styles.button} onPress={publicar}>
                 <Text style={styles.buttonText}>Publicar</Text>
             </Pressable>
         </View>

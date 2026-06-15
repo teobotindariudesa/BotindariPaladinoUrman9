@@ -8,19 +8,22 @@ function Perfil() {
     const [posteos, setPosteos] = useState([]);
 
     useEffect(() => {
-        db.collection('users').doc(user.uid).get().then(doc => {
-            if (doc.exists) setUsername(doc.data().username);
-        });
+        db.collection('users').doc(user.uid).get()
+            .then(doc => {
+                setUsername(doc.data().username);
+            });
 
-        const unsubscribe = db.collection('posts')
+        db.collection('posts')
             .where('email', '==', user.email)
             .orderBy('createdAt', 'desc')
-            .onSnapshot(snap => {
+            .onSnapshot(docs => {
                 const data = [];
-                snap.forEach(doc => data.push({ id: doc.id, ...doc.data() }));
+                docs.forEach(doc => {
+                    const info = doc.data();
+                    data.push({ id: doc.id, descripcionPost: info.descripcionPost, likes: info.likes });
+                });
                 setPosteos(data);
             });
-        return () => unsubscribe();
     }, []);
 
     return (
@@ -43,7 +46,6 @@ function Perfil() {
                         <Text style={styles.postMeta}>{item.likes?.length || 0} likes</Text>
                     </View>
                 )}
-                ListEmptyComponent={<Text style={styles.vacio}>No publicaste nada aún</Text>}
             />
         </View>
     );

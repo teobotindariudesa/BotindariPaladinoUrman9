@@ -5,10 +5,9 @@ import Post from '../components/Post';
 
 const Home = ({ navigation }) => {
   const [posteos, setPosteos] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = db.collection('posts')
+    db.collection('posts')
       .orderBy('createdAt', 'desc')
       .onSnapshot(docs => {
         let posts = [];
@@ -16,10 +15,7 @@ const Home = ({ navigation }) => {
           posts.push({ id: doc.id, data: doc.data() });
         });
         setPosteos(posts);
-        setLoading(false);
       });
-
-    return () => unsubscribe();
   }, []);
 
   return (

@@ -29,7 +29,9 @@ function Registro(props) {
 
         auth.createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
-                return db.collection('users').doc(userCredential.user.uid).set({
+                return db.collection('users')
+                .doc(userCredential.user.uid)
+                .set({
                     email: email,
                     username: username,
                 });

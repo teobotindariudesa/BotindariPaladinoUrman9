@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Pressable, FlatList, StyleSheet } from 'react-native';
 import { db, auth } from '../firebase/config';
@@ -8,7 +9,7 @@ function ComentarPosteo({ route }) {
     const [texto, setTexto] = useState('');
 
     useEffect(() => {
-        const desuscribir = db.collection('posts').doc(postId)
+        const comentarioss = db.collection('posts').doc(postId)
             .collection('comentarios')
             .orderBy('createdAt', 'asc')
             .onSnapshot(snap => {
@@ -19,12 +20,15 @@ function ComentarPosteo({ route }) {
                 });
                 setComentarios(data);
             });
-        return () => desuscribir();
+        return () => comentarioss();
     }, [postId]);
 
     const publicar = () => {
         if (texto === '') return;
-        db.collection('posts').doc(postId).collection('comentarios').add({
+        db.collection('posts')
+        .doc(postId)
+        .collection('comentarios')
+        .add({
             texto: texto,
             email: auth.currentUser.email,
             createdAt: Date.now(),
@@ -33,17 +37,19 @@ function ComentarPosteo({ route }) {
 
     return (
         <View style={styles.container}>
-            <FlatList
-                data={comentarios}
-                keyExtractor={item => item.id}
-                renderItem={({ item }) => (
-                    <View style={styles.comentario}>
-                        <Text style={styles.email}>{item.email}</Text>
-                        <Text>{item.texto}</Text>
-                    </View>
-                )}
-                ListEmptyComponent={<Text style={styles.vacio}>Sin comentarios aún</Text>}
-            />
+            {comentarios.length === 0
+                ? <Text style={styles.vacio}>Sin comentarios aún</Text>
+                : <FlatList
+                    data={comentarios}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => (
+                        <View style={styles.comentario}>
+                            <Text style={styles.email}>{item.email}</Text>
+                            <Text>{item.texto}</Text>
+                        </View>
+                    )}
+                />
+            }
             <View style={styles.inputRow}>
                 <TextInput
                     style={styles.input}
