@@ -25,8 +25,6 @@ function CrearPosteo(props) {
                 placeholder="¿Qué querés compartir?"
                 value={descripcionPost}
                 onChangeText={setDescripcionPost}
-                multiline
-                numberOfLines={4}
                 textAlignVertical="top"
             />
             <Pressable style={styles.button} onPress={publicar}>
